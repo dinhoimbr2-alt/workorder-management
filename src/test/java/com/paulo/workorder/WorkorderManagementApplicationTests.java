@@ -1,0 +1,13 @@
+package com.paulo.workorder;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class WorkorderManagementApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

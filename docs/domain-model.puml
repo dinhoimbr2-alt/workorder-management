@@ -1,0 +1,23 @@
+
+@startuml
+
+class Worker {
+ id : Long
+ name : String
+ phone : String
+ shift : Shift
+ active : boolean
+}
+
+class WorkOrder {
+ id : Long
+ description : String
+ location : String
+ priority : Priority
+ status : Status
+ createdAt : LocalDateTime
+}
+
+Worker "1" -- "0..*" WorkOrder : assigned
+
+@enduml

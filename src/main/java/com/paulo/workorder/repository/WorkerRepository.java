@@ -1,0 +1,7 @@
+package com.paulo.workorder.repository;
+
+import com.paulo.workorder.entity.Worker;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WorkerRepository extends JpaRepository<Worker, Long> {
+}
