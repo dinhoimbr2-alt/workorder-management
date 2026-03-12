@@ -63,7 +63,7 @@ Meaning:
 
 # UML Representation
 
-![Domain Model](images/domain-model.SVG)
+![Domain Model](images/domain-model.svg)
 
 Worker
 ------
