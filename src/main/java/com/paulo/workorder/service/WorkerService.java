@@ -24,8 +24,16 @@ public class WorkerService {
     public Worker createWorker(Worker worker){
         return workerRepository.save(worker);
     }
-    public Worker updateWorker(Long id, Worker worker){
-        worker.setId(id);
+    public Worker updateWorker(Long id, Worker workerData) {
+
+        Worker worker = workerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Worker not found"));
+
+        worker.setName(workerData.getName());
+        worker.setPhone(workerData.getPhone());
+        worker.setShift(workerData.getShift());
+        worker.setActive(workerData.isActive());
+
         return workerRepository.save(worker);
     }
     public void deleteWorker(Long id){

@@ -1,64 +1,72 @@
-# Work Order Management – Architecture (V2)
+# WorkOrder Management – Architecture V3
 
-## Overview
+Version 3 introduces:
 
-Version 2 introduces a layered architecture using Spring Boot.
-
-The application now exposes REST endpoints and follows a typical
-Controller → Service → Repository structure.
+- Automatic database population
+- Postman API testing collection
+- Full CRUD verification
 
 ---
 
-## Architecture Layers
+## Database Population
+
+A `DataInitializer` component was introduced to populate the database when the application starts.
+
+Location:
+
+src/main/java/com/paulo/workorder/config/DataInitializer.java
+
+Purpose:
+
+- Create sample Workers automatically
+- Allow API testing without manual data creation
+
+Example generated workers:
+
+Worker 1  
+Worker 2  
+Worker 3  
+
+---
+
+## API Testing
+
+The API can be tested using the provided Postman collection.
+
+Location:
+
+docs/postman/workorder-api.postman_collection.json
+
+Endpoints available:
+
+| Method | Endpoint | Description |
+|------|------|------|
+GET | /workers | Get all workers |
+GET | /workers/{id} | Get worker by id |
+POST | /workers | Create worker |
+PUT | /workers/{id} | Update worker |
+DELETE | /workers/{id} | Delete worker |
+
+---
+
+## Application Flow
 
 Client (Postman)
 ↓
-Controller
+WorkerController
 ↓
-Service
+WorkerService
 ↓
-Repository
+WorkerRepository
 ↓
-Database (H2)
+H2 Database
 
 ---
 
-# Architecture V2
+## Purpose of V3
 
-This version introduces the layered architecture with Controller, Service and Repository.
+This version prepares the backend for future features such as:
 
-## Architecture Diagram
-
-![Architecture V2](images/architecture-v2.png)
-
-## Responsibilities
-
-### Controller
-
-Handles HTTP requests and exposes REST endpoints.
-
-Example endpoints:
-
-GET /workers  
-GET /workers/{id}  
-POST /workers  
-PUT /workers/{id}  
-DELETE /workers/{id}
-
----
-
-### Service
-
-Contains business logic and coordinates operations between controllers and repositories.
-
----
-
-### Repository
-
-Spring Data JPA repository responsible for persistence.
-
----
-
-### Database
-
-H2 in-memory database used for development and testing.
+- WorkOrder entity
+- Worker–WorkOrder relationships
+- Advanced queries
