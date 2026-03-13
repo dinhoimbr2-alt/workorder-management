@@ -23,6 +23,14 @@ Database (H2)
 
 ---
 
+# Architecture V2
+
+This version introduces the layered architecture with Controller, Service and Repository.
+
+## Architecture Diagram
+
+![Architecture V2](images/architecture-v2.png)
+
 ## Responsibilities
 
 ### Controller

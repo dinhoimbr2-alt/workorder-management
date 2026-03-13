@@ -1,4 +1,3 @@
-
 # Work Order Management – Domain Model (V1)
 
 ## Overview
@@ -34,7 +33,7 @@ Fields:
 
 Represents a maintenance order generated from an incident.
 
-Example: *Electrical outlet not working*
+Example: _Electrical outlet not working_
 
 Fields:
 
@@ -51,7 +50,7 @@ Fields:
 
 Relationship:
 
-Worker (1) ---- (0..*) WorkOrder
+Worker (1) ---- (0..\*) WorkOrder
 
 Meaning:
 
@@ -63,18 +62,18 @@ Meaning:
 
 # UML Representation
 
-![Domain Model](images/domain-model.SVG)
+![Domain Model](images/domain-model.svg)
 
-Worker
-------
+## Worker
+
 id
 name
 phone
 shift
 active
 
-WorkOrder
----------
+## WorkOrder
+
 id
 description
 location
