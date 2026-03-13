@@ -1,56 +1,87 @@
-# Work Order Management – Architecture (V2)
+
+# Work Order Management – Domain Model (V1)
 
 ## Overview
 
-Version 2 introduces a layered architecture using Spring Boot.
+This project models a simple maintenance **Work Order system**.
 
-The application now exposes REST endpoints and follows a typical
-Controller → Service → Repository structure.
+Goals of V1:
 
----
-
-## Architecture Layers
-
-Client (Postman)
-      ↓
-Controller
-      ↓
-Service
-      ↓
-Repository
-      ↓
-Database (H2)
+- Create a **domain model**
+- Persist data using **Spring Data JPA**
+- Store data in **H2 database**
+- Verify persistence with **JUnit tests**
 
 ---
 
-## Responsibilities
+# Domain Concepts
 
-### Controller
+## Worker
 
-Handles HTTP requests and exposes REST endpoints.
+Represents a technician who performs maintenance work.
 
-Example endpoints:
+Fields:
 
-GET /workers  
-GET /workers/{id}  
-POST /workers  
-PUT /workers/{id}  
-DELETE /workers/{id}
-
----
-
-### Service
-
-Contains business logic and coordinates operations between controllers and repositories.
+- id (Long)
+- name (String)
+- phone (String)
+- shift (MORNING / AFTERNOON)
+- active (boolean)
 
 ---
 
-### Repository
+## WorkOrder
 
-Spring Data JPA repository responsible for persistence.
+Represents a maintenance order generated from an incident.
+
+Example: *Electrical outlet not working*
+
+Fields:
+
+- id (Long)
+- description (String)
+- location (String)
+- priority (LOW / MEDIUM / HIGH)
+- status (OPEN / IN_PROGRESS / CLOSED)
+- createdAt (DateTime)
 
 ---
 
-### Database
+# Cardinality
 
-H2 in-memory database used for development and testing.
+Relationship:
+
+Worker (1) ---- (0..*) WorkOrder
+
+Meaning:
+
+• One worker can execute many work orders  
+• A work order may initially have **no worker assigned**  
+• Later it can be assigned to **one worker**
+
+---
+
+# UML Representation
+
+![Domain Model](images/domain-model.SVG)
+
+Worker
+------
+id
+name
+phone
+shift
+active
+
+WorkOrder
+---------
+id
+description
+location
+priority
+status
+createdAt
+
+Relationship:
+
+Worker 1 → many WorkOrders
