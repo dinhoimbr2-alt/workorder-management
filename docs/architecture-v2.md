@@ -1,43 +1,14 @@
-# WorkOrder Management – Architecture V3
+# API Testing
 
-Version 3 introduces:
-
-- Automatic database population
-- Postman API testing collection
-- Full CRUD verification
-
----
-
-## Database Population
-
-A `DataInitializer` component was introduced to populate the database when the application starts.
-
-Location:
-
-src/main/java/com/paulo/workorder/config/DataInitializer.java
-
-Purpose:
-
-- Create sample Workers automatically
-- Allow API testing without manual data creation
-
-Example generated workers:
-
-Worker 1  
-Worker 2  
-Worker 3  
-
----
-
-## API Testing
-
-The API can be tested using the provided Postman collection.
+The REST API can be tested using the included Postman collection.
 
 Location:
 
 docs/postman/workorder-api.postman_collection.json
 
-Endpoints available:
+---
+
+# Available Endpoints
 
 | Method | Endpoint | Description |
 |------|------|------|
@@ -49,24 +20,40 @@ DELETE | /workers/{id} | Delete worker |
 
 ---
 
-## Application Flow
+# GET All Workers
 
-Client (Postman)
-↓
-WorkerController
-↓
-WorkerService
-↓
-WorkerRepository
-↓
-H2 Database
+<p align="center">
+  <img src="images/postman-get-workers.png" width="800"/>
+</p>
 
 ---
 
-## Purpose of V3
+# GET Worker by ID
 
-This version prepares the backend for future features such as:
+<p align="center">
+  <img src="images/postman-get-worker-id.png" width="800"/>
+</p>
 
-- WorkOrder entity
-- Worker–WorkOrder relationships
-- Advanced queries
+---
+
+# POST Create Worker
+
+<p align="center">
+  <img src="images/postman-post-worker.png" width="800"/>
+</p>
+
+---
+
+# PUT Update Worker
+
+<p align="center">
+  <img src="images/postman-put-worker.png" width="800"/>
+</p>
+
+---
+
+# DELETE Worker
+
+<p align="center">
+  <img src="images/postman-delete-worker.png" width="800"/>
+</p>
