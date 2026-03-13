@@ -12,13 +12,13 @@ Controller → Service → Repository structure.
 ## Architecture Layers
 
 Client (Postman)
-      ↓
+↓
 Controller
-      ↓
+↓
 Service
-      ↓
+↓
 Repository
-      ↓
+↓
 Database (H2)
 
 ---
