@@ -1,26 +1,50 @@
-# API Testing
+# WorkOrder Management API Testing Guide
 
-The REST API can be tested using the included Postman collection.
+This document explains how to test the WorkOrder Management REST API using Postman.
+
+---
+
+## Base URL
+
+```
+http://localhost:8080
+```
+
+All endpoints described below use this base URL.
+
+---
+
+## Postman Collection
+
+A ready-to-use Postman collection is included in the project.
 
 Location:
 
+```
 docs/postman/workorder-api.postman_collection.json
+```
+
+Import this file into Postman to quickly test all API endpoints.
 
 ---
 
-# Available Endpoints
+# Workers API
 
-| Method | Endpoint      | Description      |
-| ------ | ------------- |------------------|
-| GET    | /workers      | Get all workers  |
-| GET    | /workers/{id} | Get worker by id |
-| POST   | /workers      | Create worker    |
-| PUT    | /workers/{id} | Update worker    |
-| DELETE | /workers/{id} | Delete worker    |
+The Workers API manages workers stored in the system.
+
+| Method | Endpoint | Description |
+|------|------|------|
+| GET | /workers | Retrieve all workers |
+| GET | /workers/{id} | Retrieve a worker by id |
+| POST | /workers | Create a new worker |
+| PUT | /workers/{id} | Update an existing worker |
+| DELETE | /workers/{id} | Delete a worker |
 
 ---
 
-# GET All Workers
+## GET /workers
+
+Returns the list of all workers stored in the database.
 
 <p align="center">
   <img src="images/postman/get-all-workers.png" width="800"/>
@@ -28,7 +52,15 @@ docs/postman/workorder-api.postman_collection.json
 
 ---
 
-# GET Worker by ID
+## GET /workers/{id}
+
+Returns a specific worker by id.
+
+Example:
+
+```
+GET /workers/1
+```
 
 <p align="center">
   <img src="images/postman/get-worker-by-id.png" width="800"/>
@@ -36,7 +68,20 @@ docs/postman/workorder-api.postman_collection.json
 
 ---
 
-# POST Create Worker
+## POST /workers
+
+Creates a new worker.
+
+Example request body:
+
+```json
+{
+  "name": "Paulo",
+  "phone": "600123456",
+  "shift": "MORNING",
+  "active": true
+}
+```
 
 <p align="center">
   <img src="images/postman/post-workers.png" width="600"/>
@@ -44,7 +89,15 @@ docs/postman/workorder-api.postman_collection.json
 
 ---
 
-# PUT Update Worker
+## PUT /workers/{id}
+
+Updates an existing worker.
+
+Example:
+
+```
+PUT /workers/1
+```
 
 <p align="center">
   <img src="images/postman/put-worker.png" width="600"/>
@@ -52,82 +105,39 @@ docs/postman/workorder-api.postman_collection.json
 
 ---
 
-# DELETE Worker
+## DELETE /workers/{id}
+
+Deletes a worker by id.
+
+Example:
+
+```
+DELETE /workers/1
+```
 
 <p align="center">
   <img src="images/postman/delete-worker.png" width="600"/>
 </p>
 
-# API Testing Guide
+---
 
-This document explains how to test the WorkOrder Management API
-using Postman.
+# Tasks API
 
-Base URL
+The Tasks API manages tasks associated with work orders.
 
-http://localhost:8080
+| Method | Endpoint | Description |
+|------|------|------|
+| GET | /tasks | Retrieve all tasks |
+| GET | /tasks/{id} | Retrieve task by id |
+| POST | /tasks | Create a new task |
+| PUT | /tasks/{id} | Update a task |
+| DELETE | /tasks/{id} | Delete a task |
 
 ---
 
-# Workers Endpoints
+## GET /tasks
 
-## Get All Workers
-
-GET /workers
-
-Returns the list of workers stored in the database.
-
----
-
-## Get Worker By Id
-
-GET /workers/{id}
-
-Example:
-
-GET /workers/1
-
----
-
-## Create Worker
-
-POST /workers
-
-Body:
-
-{
-"name": "Paulo",
-"phone": "600123456",
-"shift": "MORNING",
-"active": true
-}
-
----
-
-## Update Worker
-
-PUT /workers/{id}
-
----
-
-## Delete Worker
-
-DELETE /workers/{id}
-
----
-
-# Tasks Endpoints
-
-
-| Method | Endpoint    | Description   |
-| GET    | /Task       | Get all Task  |
-| GET    | /Tasks/{id} | Get Task by id|
-| POST   | /Tasks      | Create Task   |
-| PUT    | /Tasks/{id} | Update Task   |
-| DELETE | /Tasks/{id} | Delete Task   |
-
-
-## Get All Tasks
+Returns the list of all tasks.
 
 <p align="center">
   <img src="images/postman/get-all-task.png" width="800"/>
@@ -135,34 +145,44 @@ DELETE /workers/{id}
 
 ---
 
-## Get Task By Id
+## GET /tasks/{id}
+
+Returns a specific task.
+
+Example:
+
+```
+GET /tasks/1
+```
 
 <p align="center">
   <img src="images/postman/get-task-by-id.png" width="800"/>
 </p>
 
-Example:
-
-GET /tasks/1
-
 ---
 
-## Create Task
+## POST /tasks
+
+Creates a new task.
+
+Example request body:
+
+```json
+{
+  "title": "Cleaning",
+  "description": "Clean building"
+}
+```
 
 <p align="center">
-  <img src="images/postman/post-crate-task.png" width="800"/>
+  <img src="images/postman/post-create-task.png" width="800"/>
 </p>
-
-Body:
-
-{
-"title": "Cleaning",
-"description": "Clean building"
-}
 
 ---
 
-## Update Task
+## PUT /tasks/{id}
+
+Updates an existing task.
 
 <p align="center">
   <img src="images/postman/put-update-task.png" width="800"/>
@@ -170,7 +190,9 @@ Body:
 
 ---
 
-## Delete Task
+## DELETE /tasks/{id}
+
+Deletes a task.
 
 <p align="center">
   <img src="images/postman/delete-task.png" width="800"/>
@@ -178,22 +200,23 @@ Body:
 
 ---
 
-# Postman Collection
+# Recommended Testing Flow
 
-The project includes a Postman collection located in:
+When testing the API with Postman, follow this order:
 
-docs/postman/
-
-Import this collection into Postman to test the API endpoints.
+1. Create a resource (POST)
+2. Retrieve the list (GET)
+3. Retrieve by id (GET)
+4. Update the resource (PUT)
+5. Delete the resource (DELETE)
 
 ---
 
-# Test Flow
+# Summary
 
-Recommended order for testing endpoints:
+The WorkOrder Management API provides REST endpoints for managing:
 
-1 Create resource (POST)
-2 Retrieve list (GET)
-3 Retrieve by id (GET)
-4 Update resource (PUT)
-5 Delete resource (DELETE)
+- Workers
+- Tasks
+
+The included Postman collection allows quick testing of all endpoints during development.
