@@ -8,4 +8,12 @@ class Worker {
   active : boolean
 }
 
+class Task {
+  id : Long
+  title : String
+  description : String
+}
+
 @enduml
+
+---
