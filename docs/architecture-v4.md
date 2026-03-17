@@ -1,60 +1,63 @@
-# WorkOrder Management API
+# Architecture v4 – Workers and Tasks
 
-Spring Boot REST API for managing workers and tasks in a work order system.
+Version 4 extends the domain model by introducing the **Task** entity.
 
-This project is part of a backend learning exercise focused on:
+The system can now manage two types of resources:
 
-- Spring Boot
-- REST API design
-- JPA / Hibernate
-- H2 in-memory database
-- API testing with Postman
+- Workers
+- Tasks
 
 ---
 
-# Architecture
+## Architecture
 
-The application follows a layered architecture:
+The application follows a layered Spring Boot architecture.
 
 Controller → Service → Repository → Database
 
-Controller  
-Handles HTTP requests and responses.
+---
 
-Service  
-Contains the business logic.
+## Domain Model
 
-Repository  
-Uses Spring Data JPA to access the database.
+### Worker
 
-Database  
-H2 in-memory database used during development.
+| Field  | Type    |
+| ------ | ------- |
+| id     | Long    |
+| name   | String  |
+| phone  | String  |
+| shift  | String  |
+| active | boolean |
+
+### Task
+
+| Field       | Type   |
+| ----------- | ------ |
+| id          | Long   |
+| title       | String |
+| description | String |
 
 ---
 
-# Data Model
+## Architecture Diagram
 
-## Worker
+The following diagram shows the layered architecture of the system including both Worker and Task APIs.
 
-Worker
-id
-name
-phone
-shift
-active
-
-## Task
-
-Task
-id
-title
-description
+![Architecture v4](images/architecture-v4.png)
 
 ---
 
-# API Endpoints
+## Domain Model Diagram
 
-## Workers
+The following UML diagram represents the domain model introduced in version 4.
+
+![Domain Model v4](images/domain-model-v4.png)
+
+---
+
+## API Endpoints
+
+### Workers
 
 GET /workers  
 GET /workers/{id}  
@@ -62,7 +65,7 @@ POST /workers
 PUT /workers/{id}  
 DELETE /workers/{id}
 
-## Tasks
+### Tasks
 
 GET /tasks  
 GET /tasks/{id}  
@@ -72,26 +75,10 @@ DELETE /tasks/{id}
 
 ---
 
-# Data Population
+## Purpose of Version 4
 
-The database is automatically populated at startup using **DataFaker**.
+This version expands the system by:
 
-This generates sample Workers and Tasks so the API can be tested immediately with Postman.
-
----
-
-# Testing
-
-The API was tested using:
-
-- JUnit tests for repositories
-- Postman collection for REST endpoints
-
----
-
-# Future Improvements
-
-- Introduce WorkOrder entity
-- Add relationships between Worker and Task
-- Implement validation
-- Add Swagger API documentation
+- introducing the Task entity
+- exposing CRUD endpoints for tasks
+- preparing the system for future relationships between entities

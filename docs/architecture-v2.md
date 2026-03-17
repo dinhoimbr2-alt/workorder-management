@@ -1,59 +1,60 @@
-# API Testing
+# Architecture v2 – REST API Layer
 
-The REST API can be tested using the included Postman collection.
+Version 2 introduces the REST API layer to expose the Worker entity through HTTP endpoints.
 
-Location:
-
-docs/postman/workorder-api.postman_collection.json
+This version adds the backend layers required to handle client requests.
 
 ---
 
-# Available Endpoints
+## Architectural Layers
 
-| Method | Endpoint | Description |
-|------|------|------|
-GET | /workers | Get all workers |
-GET | /workers/{id} | Get worker by id |
-POST | /workers | Create worker |
-PUT | /workers/{id} | Update worker |
-DELETE | /workers/{id} | Delete worker |
+The application follows a typical Spring Boot layered architecture.
 
----
-
-# GET All Workers
-
-<p align="center">
-  <img src="images/postman-get-workers.png" width="800"/>
-</p>
+| Layer      | Responsibility              |
+| ---------- | --------------------------- |
+| Controller | Handles HTTP requests       |
+| Service    | Contains business logic     |
+| Repository | Handles database operations |
+| Entity     | Represents the domain model |
 
 ---
 
-# GET Worker by ID
+---
 
-<p align="center">
-  <img src="images/postman-get-worker-id.png" width="800"/>
-</p>
+## Architecture Diagram
+
+The following diagram shows the layered architecture introduced in version 2.
+
+![Architecture Diagram](images/architecture-v2.png)
 
 ---
 
-# POST Create Worker
+## Request Flow
 
-<p align="center">
-  <img src="images/postman-post-worker.png" width="800"/>
-</p>
+Client requests follow this path:
 
----
-
-# PUT Update Worker
-
-<p align="center">
-  <img src="images/postman-put-worker.png" width="800"/>
-</p>
+Client → Controller → Service → Repository → Database
 
 ---
 
-# DELETE Worker
+## Worker REST Endpoints
 
-<p align="center">
-  <img src="images/postman-delete-worker.png" width="800"/>
-</p>
+The following endpoints are available:
+
+| Method | Endpoint      | Description           |
+| ------ | ------------- | --------------------- |
+| GET    | /workers      | Retrieve all workers  |
+| GET    | /workers/{id} | Retrieve worker by id |
+| POST   | /workers      | Create worker         |
+| PUT    | /workers/{id} | Update worker         |
+| DELETE | /workers/{id} | Delete worker         |
+
+---
+
+## Purpose of Version 2
+
+Version 2 extends the system by:
+
+- Introducing the REST API
+- Adding Controller, Service, and Repository layers
+- Allowing external clients to interact with the system through HTTP endpoints

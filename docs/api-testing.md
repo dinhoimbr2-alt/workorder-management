@@ -28,7 +28,7 @@ Import this file into Postman to quickly test all API endpoints.
 
 ---
 
-# Workers API
+## Workers API
 
 The Workers API manages workers stored in the system.
 
@@ -42,7 +42,7 @@ The Workers API manages workers stored in the system.
 
 ---
 
-## GET /workers
+### GET /workers
 
 Returns the list of all workers stored in the database.
 
@@ -52,7 +52,7 @@ Returns the list of all workers stored in the database.
 
 ---
 
-## GET /workers/{id}
+### GET /workers/{id}
 
 Returns a specific worker by id.
 
@@ -68,7 +68,7 @@ GET /workers/1
 
 ---
 
-## POST /workers
+### POST /workers
 
 Creates a new worker.
 
@@ -89,7 +89,7 @@ Example request body:
 
 ---
 
-## PUT /workers/{id}
+### PUT /workers/{id}
 
 Updates an existing worker.
 
@@ -105,7 +105,7 @@ PUT /workers/1
 
 ---
 
-## DELETE /workers/{id}
+### DELETE /workers/{id}
 
 Deletes a worker by id.
 
@@ -121,9 +121,9 @@ DELETE /workers/1
 
 ---
 
-# Tasks API
+## Tasks API
 
-The Tasks API manages tasks associated with work orders.
+The Tasks API manages tasks stored in the system.
 
 | Method | Endpoint | Description |
 |------|------|------|
@@ -135,7 +135,7 @@ The Tasks API manages tasks associated with work orders.
 
 ---
 
-## GET /tasks
+### GET /tasks
 
 Returns the list of all tasks.
 
@@ -145,7 +145,7 @@ Returns the list of all tasks.
 
 ---
 
-## GET /tasks/{id}
+### GET /tasks/{id}
 
 Returns a specific task.
 
@@ -161,7 +161,7 @@ GET /tasks/1
 
 ---
 
-## POST /tasks
+### POST /tasks
 
 Creates a new task.
 
@@ -180,9 +180,15 @@ Example request body:
 
 ---
 
-## PUT /tasks/{id}
+### PUT /tasks/{id}
 
 Updates an existing task.
+
+Example:
+
+```
+PUT /tasks/1
+```
 
 <p align="center">
   <img src="images/postman/put-update-task.png" width="800"/>
@@ -190,7 +196,7 @@ Updates an existing task.
 
 ---
 
-## DELETE /tasks/{id}
+### DELETE /tasks/{id}
 
 Deletes a task.
 
@@ -200,7 +206,7 @@ Deletes a task.
 
 ---
 
-# Recommended Testing Flow
+## Recommended Testing Flow
 
 When testing the API with Postman, follow this order:
 
@@ -212,7 +218,7 @@ When testing the API with Postman, follow this order:
 
 ---
 
-# Summary
+## Summary
 
 The WorkOrder Management API provides REST endpoints for managing:
 

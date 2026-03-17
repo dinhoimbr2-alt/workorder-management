@@ -1,42 +1,22 @@
 @startuml
 
-package "Controller Layer" {
- class WorkerController
-}
+title Architecture v2 - REST API Layer
 
-package "Service Layer" {
- class WorkerService
-}
+class WorkerController
+class WorkerService
+interface WorkerRepository
 
-package "Persistence Layer" {
- interface WorkerRepository
-}
-
-package "Domain Layer" {
-
- class Worker {
+class Worker {
   id : Long
   name : String
   phone : String
-  shift : Shift
+  shift : String
   active : boolean
- }
-
- class WorkOrder {
-  id : Long
-  description : String
-  location : String
-  priority : Priority
-  status : Status
-  createdAt : LocalDateTime
- }
-
 }
 
+Client --> WorkerController
 WorkerController --> WorkerService
 WorkerService --> WorkerRepository
 WorkerRepository --> Worker
-
-Worker "1" -- "0..*" WorkOrder : assigned
 
 @enduml
