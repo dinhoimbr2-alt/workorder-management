@@ -1,0 +1,17 @@
+@startuml
+
+actor Client
+
+Client --> WorkerController
+Client --> TaskController
+
+WorkerController --> WorkerService
+TaskController --> TaskService
+
+WorkerService --> WorkerRepository
+TaskService --> TaskRepository
+
+WorkerRepository --> Database
+TaskRepository --> Database
+
+@enduml
