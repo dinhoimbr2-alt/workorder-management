@@ -1,0 +1,11 @@
+@startuml
+
+class Worker {
+  id : Long
+  name : String
+  phone : String
+  shift : String
+  active : boolean
+}
+
+@enduml

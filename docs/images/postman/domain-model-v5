@@ -1,0 +1,50 @@
+@startuml
+
+class Worker {
+  id : Long
+  name : String
+  phone : String
+  shift : String
+  active : boolean
+}
+
+class WorkOrder {
+  id : Long
+  title : String
+  description : String
+  status : String
+  createdAt : LocalDateTime
+}
+
+class Task {
+  id : Long
+  title : String
+  description : String
+  status : String
+}
+
+Worker "1" -- "*" Task : assigned
+WorkOrder "1" -- "*" Task : contains
+
+@enduml
+
+---
+
+@startuml
+
+actor Client
+
+Client -> WorkOrderController : createWorkOrder()
+WorkOrderController -> WorkOrderService : createWorkOrder()
+WorkOrderService -> WorkOrderRepository : save(workOrder)
+WorkOrderRepository -> Database : insert
+
+Client -> TaskController : createTask(workOrderId)
+TaskController -> TaskService : createTask()
+TaskService -> TaskRepository : save(task)
+TaskRepository -> Database : insert
+
+TaskService -> WorkerRepository : findWorker()
+WorkerRepository -> Database : select
+
+@enduml

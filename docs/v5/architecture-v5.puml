@@ -1,0 +1,30 @@
+@startuml
+title Domain Model v5 - WorkOrder Management
+
+class Worker {
+  id: Long
+  name: String
+  phone: String
+  shift: String
+  active: boolean
+}
+
+class Task {
+  id: Long
+  title: String
+  description: String
+}
+
+class WorkOrder {
+  id: Long
+  title: String
+  description: String
+  status: String
+  priority: String
+  createdAt: LocalDateTime
+}
+
+Worker "1" -- "0..*" Task : assigned to >
+WorkOrder "1" -- "0..*" Task : contains >
+
+@enduml

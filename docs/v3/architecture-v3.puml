@@ -1,0 +1,25 @@
+@startuml
+title Architecture v3 – Testable Backend
+
+class Client
+class WorkerController
+class WorkerService
+interface WorkerRepository
+
+class Worker {
+  id : Long
+  name : String
+  phone : String
+  shift : String
+  active : boolean
+}
+
+class H2Database
+
+Client --> WorkerController
+WorkerController --> WorkerService
+WorkerService --> WorkerRepository
+WorkerRepository --> H2Database
+WorkerRepository --> Worker
+
+@enduml
