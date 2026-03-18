@@ -2,10 +2,10 @@ package com.paulo.workorder.controller;
 
 import com.paulo.workorder.entity.Task;
 import com.paulo.workorder.service.TaskService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
@@ -17,26 +17,59 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    // ======================
+    // CRUD
+    // ======================
+
     @GetMapping
-    public List<Task> getAllTasks(){
-        return taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return ResponseEntity.ok(taskService.getAllTasks());
     }
+
     @GetMapping("/{id}")
-    public Optional<Task> getTaskById(@PathVariable Long id){
-        return taskService.getTaskById(id);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.getTaskById(id));
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task){
-        return taskService.createTask(task);
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        Task created = taskService.createTask(task);
+        return ResponseEntity.status(201).body(created);
+    }
 
-    }
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task){
-        return taskService.updateTask(id, task);
+    public ResponseEntity<Task> updateTask(
+            @PathVariable Long id,
+            @RequestBody Task task
+    ) {
+        return ResponseEntity.ok(taskService.updateTask(id, task));
     }
+
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id){
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // ======================
+    // 🔥 DOMAIN ENDPOINTS (v5)
+    // ======================
+
+    @PostMapping("/{taskId}/assign-worker/{workerId}")
+    public ResponseEntity<Task> assignWorker(
+            @PathVariable Long taskId,
+            @PathVariable Long workerId
+    ) {
+        Task updated = taskService.assignWorkerToTask(taskId, workerId);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PostMapping("/{taskId}/assign-workorder/{workOrderId}")
+    public ResponseEntity<Task> assignWorkOrder(
+            @PathVariable Long taskId,
+            @PathVariable Long workOrderId
+    ) {
+        Task updated = taskService.assignWorkOrderToTask(taskId, workOrderId);
+        return ResponseEntity.ok(updated);
     }
 }

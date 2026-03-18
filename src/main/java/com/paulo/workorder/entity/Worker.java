@@ -1,6 +1,10 @@
 package com.paulo.workorder.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Worker {
@@ -14,6 +18,11 @@ public class Worker {
     private String shift;
     private boolean active;
 
+    // 🔥 RELACIÓN INVERSA
+    @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Task> tasks = new ArrayList<>();
+
     public Worker() {
     }
 
@@ -23,6 +32,24 @@ public class Worker {
         this.shift = shift;
         this.active = active;
     }
+
+    // ======================
+    // 🔥 MÉTODOS DE DOMINIO
+    // ======================
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        task.assignWorker(this);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+        task.assignWorker(null);
+    }
+
+    // ======================
+    // GETTERS & SETTERS
+    // ======================
 
     public Long getId() {
         return id;
@@ -44,23 +71,23 @@ public class Worker {
         return active;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setShift(String shift) {
-        this.shift = shift;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

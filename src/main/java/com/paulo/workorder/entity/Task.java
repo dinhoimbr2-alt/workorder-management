@@ -1,10 +1,7 @@
 package com.paulo.workorder.entity;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 @Entity
 public class Task {
@@ -16,35 +13,67 @@ public class Task {
     private String title;
     private String description;
 
+    // 🔹 Relación con Worker
+    @ManyToOne
+    @JoinColumn(name = "worker_id")
+    @JsonIgnoreProperties("tasks")
+    private Worker worker;
+
+    // 🔹 Relación con WorkOrder
+    @ManyToOne
+    @JoinColumn(name = "work_order_id")
+    @JsonIgnoreProperties("tasks")
+    private WorkOrder workOrder;
+
     public Task() {
     }
 
-    public Task(String description, String title) {
-        this.description = description;
+    public Task(String title, String description) {
         this.title = title;
+        this.description = description;
     }
+
+    // ======================
+    // 🔥 MÉTODOS DE DOMINIO
+    // ======================
+
+    public void assignWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+    public void assignWorkOrder(WorkOrder workOrder) {
+        this.workOrder = workOrder;
+    }
+
+    // ======================
+    // GETTERS & SETTERS
+    // ======================
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public WorkOrder getWorkOrder() {
+        return workOrder;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
